@@ -23,11 +23,11 @@ pipeline {
         }
         stage('Upload backend Docker Image to Docker Hub') {
             steps {
-                sh "docker login -u kajetan -p ${DOCKER_HUB_PASSWORD}"
-                sh "docker tag devops_flask_app:${BUILD_NUMBER} kajetan/devops_flask_app:${BUILD_NUMBER}"
-                sh 'docker tag devops_flask_app:latest kajetan/devops_flask_app:latest'
-                sh "docker push kajetan/devops_flask_app:${BUILD_NUMBER}"
-                sh 'docker push kajetan/devops_flask_app:latest'
+                sh "docker login -u kajetangrabaragrabar -p ${DOCKER_HUB_PASSWORD}"
+                sh "docker tag devops_flask_app:${BUILD_NUMBER} kajetangrabaragrabar/devops_flask_app:${BUILD_NUMBER}"
+                sh 'docker tag devops_flask_app:latest kajetangrabaragrabar/devops_flask_app:latest'
+                sh "docker push kajetangrabaragrabar/devops_flask_app:${BUILD_NUMBER}"
+                sh 'docker push kajetangrabaragrabar/devops_flask_app:latest'
             }
         }
     }
