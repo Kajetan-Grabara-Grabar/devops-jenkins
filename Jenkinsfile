@@ -9,7 +9,7 @@ pipeline {
         stage('Clear running apps') {
             steps {
                 sh 'docker rm -f devops_flask_app || true'
-                sh "docker run --rm -d --group-add $(stat -c '%g' /var/run/docker.sock) -v /var/run/docker.sock:/var/run/docker.sock -P jenkins-docker"
+                //sh "docker run --rm -d --group-add $(stat -c '%g' /var/run/docker.sock) -v /var/run/docker.sock:/var/run/docker.sock -P jenkins-docker"
             }
         }
         stage('Build Docker Image') {
