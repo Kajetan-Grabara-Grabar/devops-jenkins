@@ -6,17 +6,16 @@ pipeline {
     }
 
     stages {
-        stage('Build Docker Image') {
-            steps {
-                sh "docker build -t devops_flask_app:${BUILD_NUMBER} -t devops_flask_app:latest ."
-            }
-        }
         stage('Clear running apps') {
             steps {
                 sh 'docker rm -f devops_flask_app || true'
             }
         }
-        
+        stage('Build Docker Image') {
+            steps {
+                sh "docker build -t devops_flask_app:${BUILD_NUMBER} -t devops_flask_app:latest ."
+            }
+        }
         stage('Run app') {
             steps {
                 sh "docker run -d -p 0.0.0.0:5555:5555 --name devops_flask_app -t devops_flask_app:${BUILD_NUMBER}"
