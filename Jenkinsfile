@@ -2,7 +2,10 @@ pipeline {
     agent any
 
     environment {
+        scannerHome = tool 'SonarQube'
+        SONARQUBE_TOKEN = credentials('TOKEN')
         DOCKER_HUB_PASSWORD = credentials('DOCKER_HUB_PASSWORD')
+        
     }
 
     stages {
@@ -10,6 +13,18 @@ pipeline {
             steps {
                 sh 'docker rm -f devops_flask_app || true'
                 //sh "docker run --rm -d --group-add $(stat -c '%g' /var/run/docker.sock) -v /var/run/docker.sock:/var/run/docker.sock -P jenkins-docker"
+            }
+        
+        }
+        stage('Sonarqube analysis'){
+            steps {
+                withSonarQubeEnv('SonarQube'){
+                    sh"${scannerHome}/bin/sonar-scanner -Dsonar.login=${SONARQUBE_TOKEN}"
+
+                }
+                timeout(time: 1,unit 'MINUTES'){
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
         stage('Build Docker Image') {
