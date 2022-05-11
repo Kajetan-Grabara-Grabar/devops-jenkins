@@ -19,7 +19,7 @@ pipeline {
         stage('Sonarqube analysis'){
             steps {
                 withSonarQubeEnv('SonarQube'){
-                    sh"${scannerHome}/bin/sonar-scanner -Dsonar.login=${SONARQUBE_TOKEN}"
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=${SONARQUBE_TOKEN}"
 
                 }
                 timeout(time: 1,unit: 'MINUTES'){
