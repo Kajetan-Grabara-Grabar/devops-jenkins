@@ -38,6 +38,14 @@ pipeline {
                 sh "docker run -d -p 0.0.0.0:5555:5555 --name devops_flask_app -t devops_flask_app:${BUILD_NUMBER}"
             }
         }
+        stage('Selenium tests') {
+            steps {
+                dir('tests/') {
+                    sh 'pip3 install -r requirements.txt'
+                    sh 'python3 test_app.py'
+                }
+            }
+        }
         stage('Upload backend Docker Image to Docker Hub') {
             steps {
                 sh "docker login -u kajetangrabaragrabar -p ${DOCKER_HUB_PASSWORD}"
