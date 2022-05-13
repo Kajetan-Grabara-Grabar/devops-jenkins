@@ -41,7 +41,7 @@ pipeline {
         stage('Selenium tests') {
             steps {
                 dir('tests/') {
-                    sh 'python pip3 install -r requirements.txt'
+                    sh 'py pip3 install -r requirements.txt'
                     sh 'python3 test_app.py'
                 }
             }
