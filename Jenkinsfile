@@ -42,7 +42,7 @@ pipeline {
             steps {
                 dir('tests/') {
                     //sh 'pip3 install -r requirements.txt'
-                    sh 'python3 test_app.py'
+                    //sh 'python3 test_app.py'
                 }
             }
         }
